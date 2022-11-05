@@ -86,7 +86,7 @@ export default function AppBanner() {
         let userInitials = auth.getUserInitials();
         console.log("userInitials: " + userInitials);
         if (loggedIn) 
-            return <div>{userInitials}</div>;
+            return <div id="account-icon">{userInitials}</div>;
         else
             return <AccountCircle />;
     }
@@ -95,7 +95,8 @@ export default function AppBanner() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography                        
+                    <Typography
+                        id="home-button"                        
                         variant="h4"
                         noWrap
                         component="div"
@@ -106,6 +107,7 @@ export default function AppBanner() {
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
+                            id="icon-button"
                             size="large"
                             edge="end"
                             aria-label="account of current user"

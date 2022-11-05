@@ -64,7 +64,7 @@ body {
   padding-left: 10%;
   padding-top: 5%;
   padding-bottom: 5%;
-  height:70%;
+  height: 70%;
   text-align: center;
   vertical-align: center;
 }
@@ -72,6 +72,15 @@ body {
 #edit-toolbar {
   background-color: transparent;
   float: right;
+}
+
+#account-icon {
+  z-index: 1;
+}
+
+#icon-button,
+#home-button {
+  z-index: 2;
 }
 
 .top5-button,

@@ -9,11 +9,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 0,
 };
 
 export default function MUIEditSongModal() {
@@ -49,7 +48,7 @@ export default function MUIEditSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.isEditSongModalOpen()}
         >
             <Box sx={style}>
             <div
@@ -58,7 +57,7 @@ export default function MUIEditSongModal() {
             data-animation="slideInOutLeft">
             <div
                 id='edit-song-root'
-                className="modal-root">
+                className="modal-dialog">
                 <div
                     id="edit-song-modal-header"
                     className="modal-north">Edit Song</div>

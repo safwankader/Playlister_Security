@@ -9,11 +9,11 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 7,
 };
 
 export default function MUIRemoveSongModal() {
@@ -31,6 +31,7 @@ export default function MUIRemoveSongModal() {
     if (store.isRemoveSongModalOpen()) {
         modalClass += " is-visible";
     }
+    console.log(modalClass)
     let songTitle = "";
     if (store.currentSong) {
         songTitle = store.currentSong.title;
@@ -38,7 +39,7 @@ export default function MUIRemoveSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.isRemoveSongModalOpen()}
         >
             <Box sx={style}>
             <div

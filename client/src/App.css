@@ -38,7 +38,7 @@ body {
   left: 0%;
 }
 
-#top5-banner {
+#playlister-banner {
   position: absolute;
   left: 0%;
   top: 0%;
@@ -83,8 +83,8 @@ body {
   z-index: 2;
 }
 
-.top5-button,
-.top5-button-disabled {
+.playlister-button,
+.playlister-button-disabled {
   font-size: 36pt;
   border-width: 0px;
   float: left;
@@ -93,17 +93,17 @@ body {
   opacity: 100%;
 }
 
-.top5-button:hover {
+.playlister-button:hover {
   cursor: pointer;
   color: black;
 }
 
-.top5-button-disabled {
+.playlister-button-disabled {
   opacity: 0.25;
   cursor: not-allowed;
 }
 
-#top5-list-selector {
+#top5-playlister-selector {
   position: absolute;
   left: 0%;
   top: 10%;
@@ -112,7 +112,7 @@ body {
   background-color: var(--swatch-primary);
 }
 
-#top5-workspace {
+#playlister-workspace {
   position: absolute;
   left: 0%;
   top: 10%;
@@ -121,8 +121,8 @@ body {
   background-color: var(--swatch-accent);
 }
 
-#top5-statusbar {
-  position: absolute;
+#playlister-statusbar {
+  position: sticky;
   left: 0%;
   top: 90%;
   width: 100%;

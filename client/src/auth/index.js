@@ -10,13 +10,16 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
-    REGISTER_USER: "REGISTER_USER"
+    REGISTER_USER: "REGISTER_USER",
+    REGISTER_USER_FAILED: "REGISTER_USER_FAILED"
 }
 
 function AuthContextProvider(props) {
     const [auth, setAuth] = useState({
         user: null,
-        loggedIn: false
+        loggedIn: false,
+        error : false,
+        errormessage : null
     });
     const history = useHistory();
 
@@ -30,25 +33,41 @@ function AuthContextProvider(props) {
             case AuthActionType.GET_LOGGED_IN: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: payload.loggedIn
+                    loggedIn: payload.loggedIn,
+                    error : false,
+                    errormessage : null
                 });
             }
             case AuthActionType.LOGIN_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    error : false,
+                    errormessage : null
                 })
             }
             case AuthActionType.LOGOUT_USER: {
                 return setAuth({
                     user: null,
-                    loggedIn: false
+                    loggedIn: false,
+                    error : false,
+                    errormessage : null
                 })
             }
             case AuthActionType.REGISTER_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    error : false,
+                    errormessage : null
+                })
+            }
+            case AuthActionType.REGISTER_USER_FAILED: {
+                return setAuth({
+                    user: payload.user,
+                    loggedIn: false,
+                    error : payload.error,
+                    errormessage : payload.errormessage
                 })
             }
             default:
@@ -70,6 +89,7 @@ function AuthContextProvider(props) {
     }
 
     auth.registerUser = async function(firstName, lastName, email, password, passwordVerify) {
+        try{
         const response = await api.registerUser(firstName, lastName, email, password, passwordVerify);      
         if (response.status === 200) {
             authReducer({
@@ -79,6 +99,16 @@ function AuthContextProvider(props) {
                 }
             })
             history.push("/");
+        }
+    } catch(err) {
+        if (err.response.status === 400){
+            // console.log(err.message)
+            console.log(err.response.data.errorMessage)
+                authReducer({
+                    type : AuthActionType.REGISTER_USER_FAILED,
+                    payload : { error: true, errormessage: err.response.data.errorMessage }
+                })
+            }
         }
     }
 
@@ -104,6 +134,17 @@ function AuthContextProvider(props) {
             })
             history.push("/");
         }
+    }
+
+    auth.hasError = function() {
+        return auth.error; 
+    }
+
+    auth.noError = function() {
+        authReducer( {
+            type: AuthActionType.REGISTER_USER_FAILED,
+            payload: {error: false, errormessage: null}
+        }) ;
     }
 
     auth.getUserInitials = function() {

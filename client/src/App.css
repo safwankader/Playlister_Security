@@ -7,11 +7,11 @@
         @author McKilla Gorilla
     */
   --swatch-foundation: #eeeedd;
-  --swatch-primary: #e6e6e6;
-  --swatch-complement: #e1e4cb;
-  --swatch-contrast: #111111;
-  --swatch-accent: #669966;
-  --swatch-status: #123456;
+  --swatch-primary: #eff2c0;
+  --swatch-complement: #a4bab7;
+  --swatch-contrast: #bea57d;
+  --swatch-accent: #a52422;
+  --swatch-status: #a4bab7;
   --my-font-family: "Robaaaoto";
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
 }
@@ -38,7 +38,7 @@ body {
   left: 0%;
 }
 
-#playlister-banner {
+#playlist-banner {
   position: absolute;
   left: 0%;
   top: 0%;
@@ -54,7 +54,7 @@ body {
   border-radius: 10px;
 }
 #splash-screen {
-  background-image: linear-gradient(to bottom, #b8b808, #636723);
+  background-image: linear-gradient(to bottom, #a4bab7, #bea57d);
   color: white;
   font-size: 5vw;
   border-color: black;
@@ -67,6 +67,10 @@ body {
   height: 70%;
   text-align: center;
   vertical-align: center;
+}
+
+#app-banner {
+  background-color: #bea57d;
 }
 
 #edit-toolbar {
@@ -83,8 +87,15 @@ body {
   z-index: 2;
 }
 
-.playlister-button,
-.playlister-button-disabled {
+#add-song-button,
+#undo-button,
+#redo-button,
+#close-button {
+  background-color: #bea57d;
+}
+
+.playlist-button,
+.playlist-button-disabled {
   font-size: 36pt;
   border-width: 0px;
   float: left;
@@ -93,17 +104,17 @@ body {
   opacity: 100%;
 }
 
-.playlister-button:hover {
+.playlist-button:hover {
   cursor: pointer;
   color: black;
 }
 
-.playlister-button-disabled {
+.playlist-button-disabled {
   opacity: 0.25;
   cursor: not-allowed;
 }
 
-#top5-playlister-selector {
+#playlister-selector {
   position: absolute;
   left: 0%;
   top: 10%;
@@ -127,7 +138,7 @@ body {
   top: 90%;
   width: 100%;
   height: 10%;
-  background-color: lightsalmon;
+  background-color: #a52422;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,6 +160,7 @@ body {
 }
 
 #add-list-button {
+  background-color: #bea57d;
   float: left;
 }
 
@@ -166,10 +178,11 @@ body {
 .list-card,
 .selected-list-card,
 .unselected-list-card {
-  font-size: 18pt;
+  font-size: 36pt;
   margin: 10px;
   padding: 20px;
-  border-radius: 25px;
+  background-color: #ffd373;
+  border-radius: 26px;
 }
 
 .list-card:aria-disabled,
@@ -200,6 +213,10 @@ body {
   transform: scale(2);
 }
 
+.song-card-button {
+  transform: scale(1.5);
+}
+
 #workspace-home,
 #workspace-edit {
   position: absolute;
@@ -228,8 +245,8 @@ body {
 }
 
 .item-number,
-.top5-item,
-.top5-item-dragged-to {
+.playlist-item,
+.playlist-item-dragged-to {
   display: flex;
   align-items: center;
   font-size: 48pt;
@@ -249,16 +266,16 @@ input {
   font-size: 20pt;
 }
 
-.top5-item,
-.top5-item-dragged-to {
+.playlist-item,
+.playlist-item-dragged-to {
   text-align: left;
   width: 95%;
   padding-left: 5%;
 }
-.top5-item {
+.playlist-item {
   background-color: var(--swatch-complement);
 }
-.top5-item-dragged-to {
+.playlist-item-dragged-to {
   background-color: var(--swatch-accent);
 }
 

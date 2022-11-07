@@ -113,6 +113,7 @@ function AuthContextProvider(props) {
     }
 
     auth.loginUser = async function(email, password) {
+        try{
         const response = await api.loginUser(email, password);
         if (response.status === 200) {
             authReducer({
@@ -123,6 +124,16 @@ function AuthContextProvider(props) {
             })
             history.push("/");
         }
+    } catch(err) {
+        if (err.response.status === 400 || err.response.status === 401){
+            // console.log(err.message)
+            console.log(err.response.data.errorMessage)
+                authReducer({
+                    type : AuthActionType.REGISTER_USER_FAILED,
+                    payload : { error: true, errormessage: err.response.data.errorMessage }
+                })
+            }
+    }
     }
 
     auth.logoutUser = async function() {

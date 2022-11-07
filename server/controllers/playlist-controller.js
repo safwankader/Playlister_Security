@@ -26,6 +26,12 @@ createPlaylist = (req, res) => {
 
     User.findOne({ _id: req.userId }, (err, user) => {
         console.log("user found: " + JSON.stringify(user));
+        if(user.email !== body.ownerEmail){
+            return res.status(400).json({
+                success : false,
+                errorMessage : "You cannot edit another user's playlist"
+            })
+        }
         user.playlists.push(playlist._id);
         user
             .save()
@@ -59,6 +65,12 @@ deletePlaylist = async (req, res) => {
         // DOES THIS LIST BELONG TO THIS USER?
         async function asyncFindUser(list) {
             User.findOne({ email: list.ownerEmail }, (err, user) => {
+                if(user.email !== body.ownerEmail){
+                    return res.status(400).json({
+                        success : false,
+                        errorMessage : "You cannot delete another user's playlist"
+                    })
+                }
                 console.log("user._id: " + user._id);
                 console.log("req.userId: " + req.userId);
                 if (user._id == req.userId) {
@@ -108,6 +120,12 @@ getPlaylistById = async (req, res) => {
 getPlaylistPairs = async (req, res) => {
     console.log("getPlaylistPairs");
     await User.findOne({ _id: req.userId }, (err, user) => {
+        if(user.email !== body.ownerEmail){
+            return res.status(400).json({
+                success : false,
+                errorMessage : "You cannot view another user's playlist"
+            })
+        }
         console.log("find user with id " + req.userId);
         async function asyncFindList(email) {
             console.log("find all Playlists owned by " + email);

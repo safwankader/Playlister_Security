@@ -265,7 +265,8 @@ function GlobalStoreContextProvider(props) {
 
     // THIS FUNCTION CREATES A NEW LIST
     store.createNewList = async function () {
-        let newListName = "Untitled" + store.newListCounter;
+        let newListName = "Untitled " + store.newListCounter;
+        console.log(store.newListCounter);
         const response = await api.createPlaylist(newListName, [], auth.user.email);
         console.log("createNewList response: " + response);
         if (response.status === 201) {
@@ -514,16 +515,16 @@ function GlobalStoreContextProvider(props) {
         tps.doTransaction();
     }
     store.canAddNewSong = function() {
-        return (store.currentList !== null);
+        return (store.currentList !== null) && (store.currentModal === CurrentModal.NONE);
     }
     store.canUndo = function() {
-        return ((store.currentList !== null) && tps.hasTransactionToUndo());
+        return ((store.currentList !== null) && tps.hasTransactionToUndo() && (store.currentModal === CurrentModal.NONE));
     }
     store.canRedo = function() {
-        return ((store.currentList !== null) && tps.hasTransactionToRedo());
+        return ((store.currentList !== null) && tps.hasTransactionToRedo() && (store.currentModal === CurrentModal.NONE));
     }
     store.canClose = function() {
-        return (store.currentList !== null);
+        return (store.currentList !== null) && (store.currentModal === CurrentModal.NONE);
     }
 
     // THIS FUNCTION ENABLES THE PROCESS OF EDITING A LIST NAME

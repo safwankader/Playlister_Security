@@ -5,19 +5,17 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import React from 'react';
-import { Modal } from '@mui/material';
+import { AlertTitle, Modal } from '@mui/material';
 import AuthContext from '../auth';
 
 export default function MUIAlerts() {
 
-  const style = {
+const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
+    width: 400,
     p: 0,
 };
 
@@ -32,6 +30,7 @@ export default function MUIAlerts() {
     <Modal open={auth.hasError()}>
       <Box sx={style}>
         <Collapse in={true}>
+          
           <Alert
             severity='error'
             action={
@@ -46,7 +45,8 @@ export default function MUIAlerts() {
             }
             sx={{ mb: 2 }}
           >
-            {auth.errormessage}
+            <AlertTitle>Error</AlertTitle>
+            <strong>{auth.errormessage}</strong>
           </Alert>
         </Collapse>
       </Box>

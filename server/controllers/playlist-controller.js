@@ -55,6 +55,7 @@ createPlaylist = (req, res) => {
 deletePlaylist = async (req, res) => {
     console.log("delete Playlist with id: " + JSON.stringify(req.params.id));
     console.log("delete " + req.params.id);
+  
     Playlist.findById({ _id: req.params.id }, (err, playlist) => {
         console.log("playlist found: " + JSON.stringify(playlist));
         if (err) {
@@ -177,13 +178,14 @@ updatePlaylist = async (req, res) => {
     const body = req.body
     console.log("updatePlaylist: " + JSON.stringify(body));
     console.log("req.body.name: " + req.body.name);
-
+    
     if (!body) {
         return res.status(400).json({
             success: false,
             error: 'You must provide a body to update',
         })
     }
+
 
     Playlist.findOne({ _id: req.params.id }, (err, playlist) => {
         console.log("playlist found: " + JSON.stringify(playlist));

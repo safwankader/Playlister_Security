@@ -98,6 +98,13 @@ function AuthContextProvider(props) {
                     user: response.data.user
                 }
             })
+            authReducer({
+                type: AuthActionType.LOGIN_USER,
+                payload :{
+                    user : response.data.user
+                }
+            })
+            
             history.push("/");
         }
     } catch(err) {
